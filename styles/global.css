@@ -1,0 +1,20 @@
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+footer {
+  padding: 40px;
+  margin-top: auto;
+  text-align: center;
+  background-color: lightgrey;
+  /* position: fixed;
+  bottom: 0;
+  width: 100%; */
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
