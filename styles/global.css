@@ -18,3 +18,10 @@ footer {
   display: flex;
   flex-direction: column;
 }
+
+span {
+  font-weight: 900;
+  color: #ff1744;
+  font-style: italic;
+  text-decoration: underline;
+}

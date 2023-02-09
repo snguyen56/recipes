@@ -27,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (params: any) => {
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const { items } = await client.getEntries({
     content_type: "recipe",
     "fields.slug": params.slug,
@@ -39,14 +39,13 @@ export const getStaticProps: GetStaticProps = async (params: any) => {
 };
 
 export default function Recipe({ recipe }: any) {
-  const { name, image, slug, cookingTime, ingredient, instructions } =
-    recipe.fields;
+  const { name, image, cookingTime, ingredients, instructions } = recipe.fields;
 
   console.log(recipe);
   return (
     <Layout>
       <Head>
-        <title>{name}</title>
+        <title>{name} | Recipes</title>
       </Head>
       <Typography variant="h2" component="h1" textAlign="center" my={5}>
         {name}
@@ -55,15 +54,12 @@ export default function Recipe({ recipe }: any) {
         <Box width="100%" height="300px" position="relative" textAlign="center">
           <Image
             src={"https:" + image.fields.file.url}
-            // width="1000"
-            // height="300"
             fill
             alt={name}
             style={{
               objectFit: "cover",
-              // width: "100%",
-              // height: "100%",
               aspectRatio: 16 / 9,
+              // objectPosition: "70% 20%",
             }}
           ></Image>
         </Box>
@@ -73,7 +69,7 @@ export default function Recipe({ recipe }: any) {
           justifyContent="space-evenly"
           my={5}
         >
-          <div>
+          <div style={{ maxWidth: "50%" }}>
             <Typography variant="h4" component="h2">
               Cooking Time:
             </Typography>
@@ -83,13 +79,11 @@ export default function Recipe({ recipe }: any) {
             <Typography variant="h4" component="h2">
               Ingredients:
             </Typography>
-            <Typography variant="body1" component="ul" my={2}>
-              {ingredient.map((item: string) => (
-                <li key={item}>{item}</li>
-              ))}
+            <Typography variant="body1" component="div" my={2}>
+              {documentToReactComponents(ingredients)}
             </Typography>
           </div>
-          <div>
+          <div style={{ maxWidth: "50%" }}>
             <Typography variant="h4" component="h2">
               Instructions:
             </Typography>

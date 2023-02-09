@@ -6,6 +6,7 @@ import { GetStaticProps } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useState } from "react";
 
 export const getStaticProps: GetStaticProps = async () => {
   const client = createClient({
@@ -22,7 +23,9 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 export default function Home({ recipes }: any) {
+  const [search, setSearch] = useState<string>("");
   console.log(recipes);
+
   return (
     <>
       <Head>
@@ -38,11 +41,12 @@ export default function Home({ recipes }: any) {
             component="h1"
             sx={{ textAlign: "center", my: 5 }}
           >
-            Find your Perfect Recipe!
+            Find your <span>Perfect</span> Recipe!
           </Typography>
           <TextField
             fullWidth
             sx={{ mb: 3 }}
+            placeholder="Search recipes"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -50,13 +54,20 @@ export default function Home({ recipes }: any) {
                 </InputAdornment>
               ),
             }}
+            onChange={(event) => setSearch(event.target.value)}
           ></TextField>
-          <Grid container>
-            <Grid item lg={4}>
-              {recipes.map((recipe: any) => (
-                <RecipeCard key={recipe.sys.id} recipe={recipe}></RecipeCard>
+          <Grid container spacing={3}>
+            {recipes
+              .filter((recipe: any) => {
+                if (!search) return true;
+                let name = recipe.fields.name.toLowerCase();
+                return name.includes(search);
+              })
+              .map((recipe: any) => (
+                <Grid item lg={4}>
+                  <RecipeCard key={recipe.sys.id} recipe={recipe}></RecipeCard>
+                </Grid>
               ))}
-            </Grid>
           </Grid>
         </Container>
       </Layout>

@@ -43,7 +43,7 @@ export default function RecipeCard({ recipe }: Props) {
       </CardContent>
       <CardActions>
         <Link href={`/recipes/${slug}`}>
-          <Button size="small">Learn More</Button>
+          <Button>view recipe</Button>
         </Link>
       </CardActions>
     </Card>
