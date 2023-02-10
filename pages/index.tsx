@@ -64,8 +64,8 @@ export default function Home({ recipes }: any) {
                 return name.includes(search);
               })
               .map((recipe: any) => (
-                <Grid item lg={4}>
-                  <RecipeCard key={recipe.sys.id} recipe={recipe}></RecipeCard>
+                <Grid key={recipe.sys.id} item lg={4}>
+                  <RecipeCard recipe={recipe}></RecipeCard>
                 </Grid>
               ))}
           </Grid>
