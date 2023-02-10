@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from "@/components/Layout";
 import { createClient } from "contentful";
 import { Box, Container, Typography, Stack } from "@mui/material";
 import Image from "next/image";
@@ -43,9 +42,9 @@ export default function Recipe({ recipe }: any) {
 
   console.log(recipe);
   return (
-    <Layout>
+    <article>
       <Head>
-        <title>{name} | Recipes</title>
+        <title>{name}</title>
       </Head>
       <Typography variant="h2" component="h1" textAlign="center" my={5}>
         {name}
@@ -59,7 +58,7 @@ export default function Recipe({ recipe }: any) {
             style={{
               objectFit: "cover",
               aspectRatio: 16 / 9,
-              // objectPosition: "70% 20%",
+              objectPosition: "70% 20%",
             }}
           ></Image>
         </Box>
@@ -69,7 +68,7 @@ export default function Recipe({ recipe }: any) {
           justifyContent="space-evenly"
           my={5}
         >
-          <div style={{ maxWidth: "50%" }}>
+          <Box sx={{ maxWidth: { xs: "100%", lg: "50%" } }}>
             <Typography variant="h4" component="h2">
               Cooking Time:
             </Typography>
@@ -82,17 +81,17 @@ export default function Recipe({ recipe }: any) {
             <Typography variant="body1" component="div" my={2}>
               {documentToReactComponents(ingredients)}
             </Typography>
-          </div>
-          <div style={{ maxWidth: "50%" }}>
+          </Box>
+          <Box sx={{ maxWidth: { xs: "100%", lg: "50%" } }}>
             <Typography variant="h4" component="h2">
               Instructions:
             </Typography>
             <Typography variant="body1" component="div">
               {documentToReactComponents(instructions)}
             </Typography>
-          </div>
+          </Box>
         </Stack>
       </Container>
-    </Layout>
+    </article>
   );
 }

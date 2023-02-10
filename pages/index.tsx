@@ -34,7 +34,7 @@ export default function Home({ recipes }: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <section>
         <Container>
           <Typography
             variant="h2"
@@ -70,7 +70,7 @@ export default function Home({ recipes }: any) {
               ))}
           </Grid>
         </Container>
-      </Layout>
+      </section>
     </>
   );
 }
