@@ -7,10 +7,14 @@ footer {
   padding: 40px;
   margin-top: auto;
   text-align: center;
-  background-color: lightgrey;
+  background-color: #303030;
   /* position: fixed;
   bottom: 0;
   width: 100%; */
+}
+
+footer p {
+  color: white;
 }
 
 .layout {
@@ -19,7 +23,7 @@ footer {
   flex-direction: column;
 }
 
-span {
+#header {
   font-weight: 900;
   color: #ff1744;
   font-style: italic;

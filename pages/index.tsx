@@ -41,7 +41,7 @@ export default function Home({ recipes }: any) {
             component="h1"
             sx={{ textAlign: "center", my: 5 }}
           >
-            Find your <span>Perfect</span> Recipe!
+            Find your <span id="header">Perfect</span> Recipe!
           </Typography>
           <TextField
             fullWidth
