@@ -1,12 +1,12 @@
 import Head from "next/head";
-import Layout from "@/components/Layout";
 import { Container, Typography, Grid, TextField } from "@mui/material";
 import { createClient } from "contentful";
 import { GetStaticProps } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useBlogContext } from "@/context/BlogContext";
 
 export const getStaticProps: GetStaticProps = async () => {
   const client = createClient({
@@ -25,6 +25,16 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function Home({ recipes }: any) {
   const [search, setSearch] = useState<string>("");
   console.log(recipes);
+
+  const names = recipes.map((recipe: any) => ({
+    label: recipe.fields.name,
+    slug: recipe.fields.slug,
+  }));
+  const { saveNames } = useBlogContext();
+
+  useEffect(() => {
+    saveNames(names);
+  }, []);
 
   return (
     <>
@@ -56,7 +66,7 @@ export default function Home({ recipes }: any) {
             }}
             onChange={(event) => setSearch(event.target.value)}
           ></TextField>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} pb={3}>
             {recipes
               .filter((recipe: any) => {
                 if (!search) return true;
@@ -64,7 +74,7 @@ export default function Home({ recipes }: any) {
                 return name.includes(search);
               })
               .map((recipe: any) => (
-                <Grid key={recipe.sys.id} item lg={4}>
+                <Grid key={recipe.sys.id} item xs={12} sm={6} lg={4}>
                   <RecipeCard recipe={recipe}></RecipeCard>
                 </Grid>
               ))}

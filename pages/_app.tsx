@@ -7,6 +7,7 @@ import createEmotionCache from "../config/createEmotionCache";
 import "../styles/global.css";
 import Layout from "@/components/Layout";
 import { ThemeContextProvider } from "@/context/ThemeContext";
+import { BlogContextProvider } from "@/context/BlogContext";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -22,10 +23,12 @@ export default function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeContextProvider>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <BlogContextProvider>
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </BlogContextProvider>
       </ThemeContextProvider>
     </CacheProvider>
   );

@@ -1,6 +1,7 @@
 import { createContext, useState, useContext } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 type Props = {
   children: React.ReactNode;
@@ -21,7 +22,8 @@ export function useThemeContext() {
 }
 
 export function ThemeContextProvider({ children }: Props) {
-  const [darkMode, setDarkMode] = useState(false);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [darkMode, setDarkMode] = useState(prefersDarkMode);
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);

@@ -22,12 +22,10 @@ export default function RecipeCard({ recipe }: Props) {
         <Link href={`/recipes/${slug}`}>
           <Image
             src={"https:" + image.fields.file.url}
-            // width="400"
-            // height="225"
             width="0"
             height="0"
             alt={name}
-            sizes="33vw"
+            sizes="100vw"
             style={{ objectFit: "contain", width: "100%", height: "100%" }}
           ></Image>
         </Link>
