@@ -31,8 +31,6 @@ const CustomTextField = styled("input")(({ theme }) => ({
   fontSize: "16px",
 }));
 
-// const data = ["Matcha Latte", "Milk Tea", "Rib Roast (Prime Rib)"];
-
 export default function Layout({ children }: Props) {
   const router = useRouter();
   const { darkMode, toggleTheme } = useThemeContext();
@@ -66,7 +64,7 @@ export default function Layout({ children }: Props) {
               <Autocomplete
                 options={blogNames}
                 onChange={(event: any, newValue: any) => {
-                  router.push("/recipes/" + newValue?.slug);
+                  if (newValue) router.push("/recipes/" + newValue?.slug);
                 }}
                 renderInput={(params) => (
                   <div ref={params.InputProps.ref}>

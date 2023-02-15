@@ -5,6 +5,8 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import Loading from "@/components/Loading";
 
 type Props = {};
 
@@ -22,7 +24,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -32,12 +34,25 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
     "fields.slug": params.slug,
   });
 
+  if (!items.length) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: { recipe: items[0] },
+    revalidate: 1,
   };
 };
 
 export default function Recipe({ recipe }: any) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <Loading />;
+  }
+
   const { name, image, cookingTime, ingredients, instructions } = recipe.fields;
 
   console.log(recipe);
