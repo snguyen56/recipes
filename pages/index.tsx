@@ -14,7 +14,10 @@ export const getStaticProps: GetStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? "",
   });
 
-  const res = await client.getEntries({ content_type: "recipe" });
+  const res = await client.getEntries({
+    content_type: "recipe",
+    order: "fields.name",
+  });
 
   return {
     props: { recipes: res.items },
