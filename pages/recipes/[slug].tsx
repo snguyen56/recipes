@@ -8,8 +8,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Loading from "@/components/Loading";
 
-type Props = {};
-
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID as string,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? "",
@@ -55,7 +53,8 @@ export default function Recipe({ recipe }: any) {
 
   const { name, image, cookingTime, ingredients, instructions } = recipe.fields;
 
-  console.log(recipe);
+  // console.log(recipe);
+
   return (
     <article>
       <Head>
